@@ -4,7 +4,7 @@ import {createRouter, createWebHistory} from "vue-router";
 const routes = [
     {
         path: '/',
-        component: Welcome
+        component: Welcome,
     }
 ]
 

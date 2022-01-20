@@ -5,6 +5,11 @@ module.exports = {
   presets: [],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    extend: {
+      backgroundImage: {
+        'logout': `url('/assets/images/login-bg.png')`
+      },
+    },
     screens: {
       sm: '640px',
       md: '768px',

@@ -1,20 +1,28 @@
 <template>
-  <div class="app">
-    <navbar></navbar>
-    <router-view></router-view>
-  </div>
+    <component :is="layout">
+      <router-view/>
+    </component>
 </template>
 
 <script>
-import Navbar from "./components/Navbar";
+import Site from './layouts/Site.vue'
+import CRM from './layouts/CRM.vue'
 
+const defaultLayout = 'Site'
 export default {
-  components: {Navbar}
+
+  components: {Site, CRM},
+  computed: {
+    layout() {
+      console.log(123)
+      return (this.$route.meta.layout || defaultLayout)
+    }
+  },
 }
 </script>
 
 <style lang="postcss">
-  body{
-    @apply bg-gray-200
-  }
+body {
+  @apply bg-gray-100
+}
 </style>
