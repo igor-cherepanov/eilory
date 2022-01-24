@@ -30,9 +30,7 @@ export default {
   name: "LoginForm",
   components: {InlineInput},
   methods: {
-    login(){
 
-    }
   }
 }
 </script>

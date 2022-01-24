@@ -4,8 +4,7 @@
       <div class="flex justify-center pb-6 font-bold text-3xl text-purple-600">
         Register
       </div>
-      <inline-input :name="'f_name'" :label="'First Name'" :placeholder="'first name'"/>
-      <inline-input :name="'l_name'" :label="'Last Name'" :placeholder="'last name'"/>
+      <inline-input :name="'name'" :label="'Name'" :placeholder="'name'"/>
       <inline-input :name="'login'" :label="'Login'" :placeholder="'login'"/>
       <inline-input :name="'password'" :label="'Password'" :placeholder="'******************'"/>
       <inline-input :name="'confirm_password'" :label="'Confirm'" :placeholder="'******************'"/>
