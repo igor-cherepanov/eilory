@@ -7,9 +7,14 @@
     </div>
     <div class="md:w-2/3">
       <input
-          class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+          class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700
+          leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+          type="text"
           :id="`inline-${name}`"
-          type="text" :placeholder="`${placeholder}`">
+          :placeholder="placeholder"
+          :value="modelValue"
+          @input="$emit('input', $event.target.value)">
+
     </div>
   </div>
 </template>
@@ -18,8 +23,11 @@
 
 export default {
   name: "InlineInput",
-  methods: {},
   props: {
+    modelValue: {
+      type: String,
+      default: null
+    },
     name: {
       type: String,
       required: true,

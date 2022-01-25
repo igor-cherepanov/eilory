@@ -1,6 +1,5 @@
-import {createStore} from 'vuex'
-
-export default createStore({
+export const userModule = {
+    namespaced: true,
     state: () => ({
         id: {
             type: Number,
@@ -35,26 +34,50 @@ export default createStore({
         },
     },
     actions: {
-        async login({state, commit}) {
+        async login({state, commit}, login, password) {
             try {
                 const loginUrl = '';
                 const response = await axios.get(loginUrl, {
                     params: {
-                        login: state.login,
-                        password: state.password,
+                        login: login,
+                        password: password,
                     }
                 })
-                if (response){
-                    this.$cookies.set("token", response.data.token, 60 * 60 * 24 * 30); // 1 month after, expire
-                }
+                commit("setId", response.data.id)
+                commit("setName", response.data.name)
+                this.$cookies.set("token", response.data.token, 60 * 60 * 24 * 30) // 1 month after, expire
+
             } catch (e) {
                 alert('Ошибка')
                 console.log(e)
             }
         },
-        async register() {
+        async register({state, commit}, login, password, name) {
+            try {
+                const registerUrl = '';
+                const response = await axios.get(registerUrl, {
+                    params: {
+                        login: login,
+                        password: password,
+                        name: name,
+                    }
+                })
+                commit("setId", response.data.id)
+                commit("setName", response.data.name)
+                this.$cookies.remove("token", response.data.token) // 1 month after, expire
+            } catch (e) {
+                alert('Ошибка')
+                console.log(e)
+            }
+        },
+        logout({commit}) {
+            commit("setId", null)
+            commit("setLogin", "")
+            commit("setPassword", "")
+            commit("setName", "")
+            this.$cookies.remove("token")
 
         }
     },
     modules: {}
-})
+}

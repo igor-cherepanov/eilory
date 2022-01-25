@@ -4,10 +4,10 @@
       <div class="flex justify-center pb-6 font-bold text-3xl text-purple-600">
         Register
       </div>
-      <inline-input :name="'name'" :label="'Name'" :placeholder="'name'"/>
-      <inline-input :name="'login'" :label="'Login'" :placeholder="'login'"/>
-      <inline-input :name="'password'" :label="'Password'" :placeholder="'******************'"/>
-      <inline-input :name="'confirm_password'" :label="'Confirm'" :placeholder="'******************'"/>
+      <inline-input v-model="name" name="name" label="Name" placeholder="name"/>
+      <inline-input v-model="login" name="login" label="Login" placeholder="login"/>
+      <inline-input v-model="password" name="password" label="Password" placeholder="******************"/>
+      <inline-input v-model="confirmPassword" name="confirm_password" label="Confirm" placeholder="******************"/>
 <!--      <div class="md:flex md:items-center mb-6">-->
 <!--        <div class="md:w-1/3"></div>-->
 <!--        <label class="md:w-2/3 block text-gray-500 font-bold">-->
@@ -25,7 +25,7 @@
         </button>
         <button
             class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-            type="button" @click="register">
+            type="button" @click="userRegister(login, password, name)">
           Register
         </button>
       </div>
@@ -35,13 +35,22 @@
 
 <script>
 import InlineInput from "./UI/InlineInput";
+import {mapActions} from "vuex";
 export default {
   name: "RegisterForm",
   components: {InlineInput},
-  methods:{
-    register(){
-
+  data(){
+    return {
+      login: '',
+      password: '',
+      name: '',
+      confirmPassword: '',
     }
+  },
+  methods:{
+    ...mapActions({
+      userRegister: "user/register",
+    }),
   }
 }
 </script>

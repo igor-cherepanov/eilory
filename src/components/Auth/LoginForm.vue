@@ -4,13 +4,13 @@
       <div class="flex justify-center pb-6 font-bold text-3xl text-purple-600">
         Login
       </div>
-      <inline-input :name="'login'" :label="'Login'" :placeholder="'login'"/>
-      <inline-input :name="'password'" :label="'Password'" :placeholder="'******************'"/>
+      <inline-input v-model="login" name="login" label="Login" placeholder="login"/>
+      <inline-input v-model="password"  name="password" label="Password" placeholder="******************"/>
 
       <div class="md:flex md:items-center space-x-5 justify-center">
         <button
             class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-            type="button" @click="login">
+            type="button" @click="userLogin(login, password)">
           Login
         </button>
         <button
@@ -25,11 +25,21 @@
 
 <script>
 import InlineInput from "./UI/InlineInput";
+import {mapActions} from "vuex";
 
 export default {
   name: "LoginForm",
   components: {InlineInput},
+  data(){
+    return {
+      login: '',
+      password: '',
+    }
+  },
   methods: {
+    ...mapActions({
+      userLogin: "user/login",
+    }),
 
   }
 }
