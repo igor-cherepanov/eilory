@@ -18,7 +18,9 @@ export const userModule = {
             default: '',
         }
     }),
-    getters: {},
+    getters: {
+
+    },
     mutations: {
         setId(state, id) {
             state.id = id
