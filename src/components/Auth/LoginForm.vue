@@ -14,6 +14,11 @@
           Login
         </button>
         <button
+            class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+            type="button" @click="test()">
+          test
+        </button>
+        <button
             class="shadow bg-gray-100 hover:bg-gray-300 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded border-purple-500 border text-purple-500"
             type="button" @click="$emit('swapComponent', 'RegisterForm')">
           Register
@@ -26,6 +31,7 @@
 <script>
 import InlineInput from "./UI/InlineInput";
 import {mapActions} from "vuex";
+import axios from "axios";
 
 export default {
   name: "LoginForm",
@@ -37,6 +43,24 @@ export default {
     }
   },
   methods: {
+    async test(){
+      const loginUrl = '';
+
+      // axios.get('http://127.0.0.1:8000/sanctum/csrf-cookie', {}, {
+      //   headers: {
+      //     Accept: "application/json"
+      //   }
+      // }).then(response => {
+      //   console.log(this)
+      // });
+      axios.get('http://127.0.0.1:8000/login', {}, {
+        headers: {
+          Accept: "application/json"
+        }
+      }).then(response => {
+        console.log(this)
+      });
+    },
     ...mapActions({
       userLogin: "user/login",
     }),
