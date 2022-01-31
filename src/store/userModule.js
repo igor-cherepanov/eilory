@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export const userModule = {
     namespaced: true,
     state: () => ({
@@ -9,18 +11,8 @@ export const userModule = {
             type: String,
             default: '',
         },
-        login: {
-            type: String,
-            default: '',
-        },
-        password: {
-            type: String,
-            default: '',
-        }
     }),
-    getters: {
-
-    },
+    getters: {},
     mutations: {
         setId(state, id) {
             state.id = id
@@ -28,27 +20,29 @@ export const userModule = {
         setName(state, name) {
             state.name = name
         },
-        setLogin(state, login) {
-            state.login = login
-        },
-        setPassword(state, password) {
-            state.password = password
-        },
     },
     actions: {
         async login({state, commit}, login, password) {
+            console.log(123, login, password);
             try {
-                const loginUrl = '';
-                const response = await axios.get(loginUrl, {
-                    params: {
-                        login: login,
-                        password: password,
-                    }
-                })
-                commit("setId", response.data.id)
-                commit("setName", response.data.name)
-                this.$cookies.set("token", response.data.token, 60 * 60 * 24 * 30) // 1 month after, expire
+                const domain = 'http://api.eilory.test';
+                const csrfUrl = domain + '/sanctum/csrf-cookie';
+                const loginUrl = domain + '/login';
+                const userInfoUrl = domain + '/user-info';
 
+                console.log(login, password)
+                axios.get(csrfUrl).then(csrfResponse => {
+                    console.log(login, password)
+                    axios.post(loginUrl, {
+                        email: login,
+                        password: password,
+                    }).then(loginResponse => {
+                        axios.get(userInfoUrl).then(userInfoResponse => {
+                            commit("setId", userInfoResponse.data.id)
+                            commit("setName", userInfoResponse.data.name)
+                        })
+                    })
+                })
             } catch (e) {
                 alert('Ошибка')
                 console.log(e)
@@ -78,7 +72,6 @@ export const userModule = {
             commit("setPassword", "")
             commit("setName", "")
             this.$cookies.remove("token")
-
         }
     },
     modules: {}

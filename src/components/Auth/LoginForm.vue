@@ -5,18 +5,13 @@
         Login
       </div>
       <inline-input v-model="login" name="login" label="Login" placeholder="login"/>
-      <inline-input v-model="password"  name="password" label="Password" placeholder="******************"/>
+      <inline-input v-model="password" name="password" label="Password" placeholder="******************"/>
 
       <div class="md:flex md:items-center space-x-5 justify-center">
         <button
             class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-            type="button" @click="userLogin(login, password)">
+            type="button" @click="userLogin('123', 'testts')">
           Login
-        </button>
-        <button
-            class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-            type="button" @click="test()">
-          test
         </button>
         <button
             class="shadow bg-gray-100 hover:bg-gray-300 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded border-purple-500 border text-purple-500"
@@ -36,31 +31,13 @@ import axios from "axios";
 export default {
   name: "LoginForm",
   components: {InlineInput},
-  data(){
+  data() {
     return {
-      login: '',
-      password: '',
+      login: '123',
+      password: '534',
     }
   },
   methods: {
-    async test(){
-      const loginUrl = '';
-
-      // axios.get('http://127.0.0.1:8000/sanctum/csrf-cookie', {}, {
-      //   headers: {
-      //     Accept: "application/json"
-      //   }
-      // }).then(response => {
-      //   console.log(this)
-      // });
-      axios.get('http://127.0.0.1:8000/login', {}, {
-        headers: {
-          Accept: "application/json"
-        }
-      }).then(response => {
-        console.log(this)
-      });
-    },
     ...mapActions({
       userLogin: "user/login",
     }),

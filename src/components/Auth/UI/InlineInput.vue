@@ -13,7 +13,7 @@
           :id="`inline-${name}`"
           :placeholder="placeholder"
           :value="modelValue"
-          @input="$emit('input', $event.target.value)">
+          @input="$emit('update:modelValue', $event.target.value)">
 
     </div>
   </div>
