@@ -10,7 +10,7 @@
       <div class="md:flex md:items-center space-x-5 justify-center">
         <button
             class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-            type="button" @click="userLogin('123', 'testts')">
+            type="button" @click="userLogin({login, password})">
           Login
         </button>
         <button
@@ -33,8 +33,8 @@ export default {
   components: {InlineInput},
   data() {
     return {
-      login: '123',
-      password: '534',
+      login: '',
+      password: '',
     }
   },
   methods: {

@@ -22,7 +22,7 @@ export const userModule = {
         },
     },
     actions: {
-        async login({state, commit}, login, password) {
+        async login({state, commit}, {login, password}) {
             console.log(123, login, password);
             try {
                 const domain = 'http://api.eilory.test';
