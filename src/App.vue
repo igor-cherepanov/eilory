@@ -14,7 +14,6 @@ export default {
   components: {Site, CRM},
   computed: {
     layout() {
-      console.log(123)
       return (this.$route.meta.layout || defaultLayout)
     }
   },

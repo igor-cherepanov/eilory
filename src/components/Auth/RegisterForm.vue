@@ -8,7 +8,7 @@
       <inline-input v-model="login" name="login" label="Login" placeholder="login"/>
       <inline-input v-model="password" name="password" label="Password" placeholder="******************"/>
       <inline-input v-model="confirmPassword" name="confirm_password" label="Confirm" placeholder="******************"/>
-<!--      <div class="md:flex md:items-center mb-6">-->
+      <!--      <div class="md:flex md:items-center mb-6">-->
 <!--        <div class="md:w-1/3"></div>-->
 <!--        <label class="md:w-2/3 block text-gray-500 font-bold">-->
 <!--          <input class="mr-2 leading-tight" type="checkbox">-->
@@ -25,7 +25,7 @@
         </button>
         <button
             class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-            type="button" @click="userRegister(login, password, name)">
+            type="button" @click="userRegister({name, login, password, confirmPassword})">
           Register
         </button>
       </div>

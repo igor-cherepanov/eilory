@@ -11,6 +11,9 @@ export default {
     Navbar,
   },
   computed: {},
+  mounted() {
+
+  }
 }
 </script>
 

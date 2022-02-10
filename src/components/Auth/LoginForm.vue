@@ -18,6 +18,16 @@
             type="button" @click="$emit('swapComponent', 'RegisterForm')">
           Register
         </button>
+        <button
+            class="shadow bg-gray-100 hover:bg-gray-300 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded border-purple-500 border text-purple-500"
+            type="button" @click="test()">
+          test
+        </button>
+        <button
+            class="shadow bg-gray-100 hover:bg-gray-300 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded border-purple-500 border text-purple-500"
+            type="button" @click="userLogout">
+          logout
+        </button>
       </div>
     </div>
   </div>
@@ -40,7 +50,13 @@ export default {
   methods: {
     ...mapActions({
       userLogin: "user/login",
+      userLogout: "user/logout",
     }),
+    test(){
+      axios.post("http://api.eilory.test/api/test").then(userInfoResponse => {
+        console.log(userInfoResponse)
+      })
+    }
 
   }
 }

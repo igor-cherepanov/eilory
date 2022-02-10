@@ -22,55 +22,58 @@ export const userModule = {
         },
     },
     actions: {
-        async login({state, commit}, {login, password}) {
+        async userInfo({commit}) {
             try {
-                const domain = 'http://api.eilory.test';
-                const csrfUrl = domain + '/sanctum/csrf-cookie';
-                const loginUrl = domain + '/login';
-                const userInfoUrl = domain + '/user-info';
+                const appUrl = process.env.VUE_APP_API_URL;
+                const userInfoUrl = appUrl + '/api/user-info';
 
-                console.log(login, password)
-                axios.get(csrfUrl).then(csrfResponse => {
-                    console.log(login, password)
-                    axios.post(loginUrl, {
-                        email: login,
-                        password: password,
-                    }).then(loginResponse => {
-                        axios.get(userInfoUrl).then(userInfoResponse => {
-                            commit("setId", userInfoResponse.data.id)
-                            commit("setName", userInfoResponse.data.name)
-                        })
-                    })
+                axios.get(userInfoUrl).then(userInfoResponse => {
+                    commit('setId', userInfoResponse.data.id)
+                    commit('setName', userInfoResponse.data.name)
                 })
             } catch (e) {
-                alert('Ошибка')
                 console.log(e)
             }
         },
-        async register({state, commit}, login, password, name) {
-            try {
-                const registerUrl = '';
-                const response = await axios.get(registerUrl, {
-                    params: {
-                        login: login,
-                        password: password,
-                        name: name,
-                    }
+        // eslint-disable-next-line no-empty-pattern
+        async login({}, {login, password}) {
+            const appUrl = process.env.VUE_APP_API_URL;
+            const csrfUrl = appUrl + '/sanctum/csrf-cookie';
+            const loginUrl = appUrl + '/login';
+
+            axios.get(csrfUrl).then(() => {
+                axios.post(loginUrl, {
+                    email: login,
+                    password: password,
+                }).then(() => {
+                    this.userInfo
                 })
-                commit("setId", response.data.id)
-                commit("setName", response.data.name)
-                this.$cookies.remove("token", response.data.token) // 1 month after, expire
-            } catch (e) {
-                alert('Ошибка')
-                console.log(e)
-            }
+            })
+        },
+        // eslint-disable-next-line no-empty-pattern
+        async register({}, {name, login, password, confirmPassword}) {
+            const domain = process.env.VUE_APP_API_URL;
+            const csrfUrl = domain + '/sanctum/csrf-cookie';
+            const registerUrl = domain + '/register';
+
+            axios.get(csrfUrl).then(() => {
+                axios.post(registerUrl, {
+                    email: login,
+                    name: name,
+                    password: password,
+                    password_confirmation: confirmPassword
+                }).then(() => {
+                    this.userInfo
+                })
+            })
         },
         logout({commit}) {
-            commit("setId", null)
-            commit("setLogin", "")
-            commit("setPassword", "")
-            commit("setName", "")
-            this.$cookies.remove("token")
+            commit('setId', null)
+            commit('setName', "")
+            const domain = process.env.VUE_APP_API_URL;
+            const logoutUrl = domain + '/logout';
+
+            axios.post(logoutUrl)
         }
     },
     modules: {}
