@@ -11,6 +11,10 @@ export const userModule = {
             type: String,
             default: '',
         },
+        auth: {
+            type: String,
+            default: '',
+        },
     }),
     getters: {},
     mutations: {
