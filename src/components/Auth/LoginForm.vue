@@ -53,7 +53,7 @@ export default {
       userLogout: "user/logout",
     }),
     test(){
-      axios.post("https://api.eilory.ru/api/test").then(userInfoResponse => {
+      axios.post("https://api.eilory.ru/api/user-info").then(userInfoResponse => {
         console.log(userInfoResponse)
       })
     }
