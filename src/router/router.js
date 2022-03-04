@@ -1,5 +1,7 @@
 import Welcome from "../pages/Welcome";
 import {createRouter, createWebHistory} from "vue-router";
+import Home from "@/pages/CRM/Home";
+import NotificationIndex from "@/pages/CRM/notifications/Index";
 
 const routes = [
     {
@@ -8,7 +10,13 @@ const routes = [
     },
     {
         path: '/home',
-        component: Welcome,
+        component: Home,
+        meta: {layout: 'CRM'},
+    },
+    {
+        path: '/notifications',
+        component: NotificationIndex,
+        meta: {layout: 'CRM'},
     }
 ]
 

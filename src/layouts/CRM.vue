@@ -10,12 +10,6 @@ export default {
   components: {
     Navbar,
   },
-  methods: {
-  },
-  computed: {},
-  mounted() {
-
-  }
 }
 </script>
 
